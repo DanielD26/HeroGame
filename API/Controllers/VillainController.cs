@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Project.Controllers {
+namespace API.Controllers {
     [ApiController]
     [Route("[controller]")]
     public class VillainController : ControllerBase {
 
-        List<Villain> villains = new List<Villain>(){
-            new Villain("Facebook", 10),
-            new Villain("Instagram", 5),
+        static List<Villain> villains = new List<Villain>(){
+            new Villain(1, "Facebook"),
+            new Villain(2, "Instagram")
         };
 
 
@@ -23,8 +23,17 @@ namespace Project.Controllers {
         }
 
         [HttpGet]
-        public IEnumerable<Villain> Get() {
-            return villains.ToArray();
+        public List<Villain> Get(){
+            return villains;
         }
+
+        [HttpPost]
+        public Villain Post([FromBody]Villain v) {
+            villains.Add(v);
+            return v;
+        }
+
+        [HttpPut]
+        
     }
 }

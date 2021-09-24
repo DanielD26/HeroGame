@@ -52,3 +52,40 @@ INSERT INTO VILLAIN (villainID, Name) VALUES
 (3, 'Mr Bad')
 
 SELECT * FROM VILLAIN
+SELECT * FROM HERO
+
+GO
+
+------------------------------------------- PROCEDURES -------------------------------------------
+
+
+------------------------------------------- ADD_HERO ---------------------------------------------
+CREATE PROCEDURE ADD_HERO @pHEROID INT, @pNAME NVARCHAR(100), @pMINDICE INT, @pMAXDICE INT, @pUSES INT AS
+BEGIN
+    BEGIN TRY
+        INSERT INTO HERO(heroID, name, minDice, maxDice, Uses)
+        VALUES (@pHEROID, @pNAME, @pMINDICE, @pMAXDICE, @pUSES);
+    END TRY
+
+    BEGIN CATCH
+
+    END CATCH
+END
+
+GO
+
+------------------------------------------- ADD_VILLAIN -------------------------------------------
+
+CREATE PROCEDURE ADD_VILLAIN @pVILLAINID INT, @pNAME NVARCHAR(100) AS
+BEGIN
+    BEGIN TRY
+        INSERT INTO VILLAIN(villainID, Name)
+        VALUES(@pVILLAINID, @pNAME);
+    END TRY
+
+    BEGIN CATCH
+
+    END CATCH
+END
+
+    
