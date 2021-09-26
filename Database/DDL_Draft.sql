@@ -60,10 +60,14 @@ GO
 
 
 ------------------------------------------- ADD_HERO ---------------------------------------------
+IF OBJECT_ID('ADD_HERO') IS NOT NULL
+DROP PROCEDURE ADD_HERO
+GO
+
 CREATE PROCEDURE ADD_HERO @pHEROID INT, @pNAME NVARCHAR(100), @pMINDICE INT, @pMAXDICE INT, @pUSES INT AS
 BEGIN
     BEGIN TRY
-        INSERT INTO HERO(heroID, name, minDice, maxDice, Uses)
+        INSERT INTO HERO(heroID, [Name], minDice, maxDice, Uses)
         VALUES (@pHEROID, @pNAME, @pMINDICE, @pMAXDICE, @pUSES);
     END TRY
 
@@ -74,12 +78,15 @@ END
 
 GO
 
-------------------------------------------- ADD_VILLAIN -------------------------------------------
+------------------------------------------ ADD_VILLAIN -------------------------------------------
+IF OBJECT_ID('ADD_VILLAIN') IS NOT NULL
+DROP PROCEDURE ADD_VILLAIN
+GO
 
 CREATE PROCEDURE ADD_VILLAIN @pVILLAINID INT, @pNAME NVARCHAR(100) AS
 BEGIN
     BEGIN TRY
-        INSERT INTO VILLAIN(villainID, Name)
+        INSERT INTO VILLAIN(villainID, [Name])
         VALUES(@pVILLAINID, @pNAME);
     END TRY
 
@@ -88,4 +95,82 @@ BEGIN
     END CATCH
 END
 
-    
+GO
+
+----------------------------------------- UPDATE_HERO -------------------------------------------
+IF OBJECT_ID('UPDATE_HERO') IS NOT NULL
+DROP PROCEDURE UPDATE_HERO
+GO
+
+CREATE PROCEDURE UPDATE_HERO @pHEROID INT, @pNAME NVARCHAR(100), @pMINDICE INT, @pMAXDICE INT, @pUSES INT AS
+BEGIN
+    BEGIN TRY
+        UPDATE HERO
+        SET [Name] = @pNAME, minDice = @pminDICE, maxDice = @pMAXDICE, Uses = @pUSES
+        WHERE heroID = @pHEROID;
+    END TRY
+
+    BEGIN CATCH
+
+    END CATCH
+END
+
+GO
+
+----------------------------------------- UPDATE_VILLAIN -------------------------------------------
+IF OBJECT_ID('UPDATE_VILLAIN') IS NOT NULL
+DROP PROCEDURE UPDATE_VILLAIN
+GO
+
+CREATE PROCEDURE UPDATE_VILLAIN @pVILLAINID INT, @pNAME NVARCHAR(100) AS
+BEGIN
+    BEGIN TRY
+        UPDATE VILLAIN
+        SET [Name] = @pNAME
+        WHERE villainID = @pVILLAINID;
+    END TRY
+
+    BEGIN CATCH
+
+    END CATCH
+END
+
+GO
+
+----------------------------------------- DELETE_HERO -------------------------------------------
+IF OBJECT_ID('DELETE_HERO') IS NOT NULL
+DROP PROCEDURE DELETE_HERO
+GO
+
+CREATE PROCEDURE DELETE_HERO @pHEROID INT AS
+BEGIN
+    BEGIN TRY
+        DELETE FROM HERO
+        WHERE heroID = @pHEROID;
+    END TRY
+
+    BEGIN CATCH
+
+    END CATCH
+END
+
+GO
+
+----------------------------------------- DELETE_VILLAIN -------------------------------------------
+IF OBJECT_ID('DELETE_VILLAIN') IS NOT NULL
+DROP PROCEDURE DELETE_VILLAIN
+GO
+
+CREATE PROCEDURE DELETE_VILLAIN @pVILLAINID INT AS
+BEGIN
+    BEGIN TRY
+        DELETE FROM VILLAIN
+        WHERE villainID = @pVILLAINID;
+    END TRY
+
+    BEGIN CATCH
+
+    END CATCH
+END
+
+GO
