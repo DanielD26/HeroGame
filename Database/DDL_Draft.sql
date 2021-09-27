@@ -69,10 +69,12 @@ BEGIN
     BEGIN TRY
         INSERT INTO HERO(heroID, [Name], minDice, maxDice, Uses)
         VALUES (@pHEROID, @pNAME, @pMINDICE, @pMAXDICE, @pUSES);
+
     END TRY
 
     BEGIN CATCH
-
+        IF ERROR_NUMBER() = 2627
+            THROW 50010, 'Duplicate Hero ID', 1
     END CATCH
 END
 
@@ -91,7 +93,8 @@ BEGIN
     END TRY
 
     BEGIN CATCH
-
+        IF ERROR_NUMBER() = 2627
+            THROW 50020, 'Duplicate Villain ID', 1
     END CATCH
 END
 
@@ -108,10 +111,14 @@ BEGIN
         UPDATE HERO
         SET [Name] = @pNAME, minDice = @pminDICE, maxDice = @pMAXDICE, Uses = @pUSES
         WHERE heroID = @pHEROID;
+
+        IF @@ROWCOUNT = 0
+            THROW 50030, 'Hero ID not found', 1
     END TRY
 
     BEGIN CATCH
-
+        IF ERROR_NUMBER() = 50030
+            THROW
     END CATCH
 END
 
@@ -128,10 +135,14 @@ BEGIN
         UPDATE VILLAIN
         SET [Name] = @pNAME
         WHERE villainID = @pVILLAINID;
+
+        IF @@ROWCOUNT = 0
+            THROW 50040, 'Villain ID not found', 1
     END TRY
 
     BEGIN CATCH
-
+        IF ERROR_NUMBER() = 50040
+            THROW
     END CATCH
 END
 
@@ -147,10 +158,14 @@ BEGIN
     BEGIN TRY
         DELETE FROM HERO
         WHERE heroID = @pHEROID;
+
+        IF @@ROWCOUNT = 0
+            THROW 50050, 'Hero ID not found', 1
     END TRY
 
     BEGIN CATCH
-
+        IF ERROR_NUMBER() = 50050
+            THROW
     END CATCH
 END
 
@@ -166,10 +181,14 @@ BEGIN
     BEGIN TRY
         DELETE FROM VILLAIN
         WHERE villainID = @pVILLAINID;
+
+        IF @@ROWCOUNT = 0
+            THROW 50060, 'Villain ID not found', 1
     END TRY
 
     BEGIN CATCH
-
+        IF ERROR_NUMBER() = 50060
+            THROW
     END CATCH
 END
 
