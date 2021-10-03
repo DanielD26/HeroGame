@@ -32,8 +32,6 @@ namespace API.Controllers {
             villains.Add(v);
             return v;
         }
-
-        [HttpPut]
         
     }
 }
