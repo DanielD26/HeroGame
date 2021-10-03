@@ -5,10 +5,5 @@ namespace API {
         public int villainID { get; set; }
         public string Name { get; set; }
 
-
-        public Villain(int villainID, string Name) {
-            this.villainID = villainID;
-            this.Name = Name;
-        }
     }
 }
