@@ -25,5 +25,9 @@ namespace API.Controllers {
             return VillainDatabaseHandler.UpdateVillain(villain);
         }
         
+        [HttpDelete]
+        public string Delete([FromBody]Villain villain) {
+            return VillainDatabaseHandler.DeleteVillain(villain);
+        }
     }
 }

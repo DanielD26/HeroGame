@@ -59,5 +59,21 @@ namespace API {
             }
             return "Updated Villain";
         }
+
+        public static string DeleteVillain(Villain villain) {
+            using(SqlConnection conn = new SqlConnection(GetConnectionString())) {
+                conn.Open();
+
+                using(SqlCommand command = new SqlCommand("DELETE_VILLAIN", conn)) {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@pVILLAINID", villain.villainID);
+
+                    command.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+            return "Deleted Villain";
+        }
+
     }
 }
