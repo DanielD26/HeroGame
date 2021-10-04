@@ -19,6 +19,11 @@ namespace API.Controllers {
         public string Post([FromBody]Villain newVillain) {
             return VillainDatabaseHandler.AddVillain(newVillain);
         }
+
+        [HttpPut]
+        public string Put([FromBody]Villain villain) {
+            return VillainDatabaseHandler.UpdateVillain(villain);
+        }
         
     }
 }

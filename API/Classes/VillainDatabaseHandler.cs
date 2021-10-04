@@ -43,5 +43,21 @@ namespace API {
             }
             return "Added Villain";
         }
+
+        public static string UpdateVillain(Villain villain) {
+            using(SqlConnection conn = new SqlConnection(GetConnectionString())) {
+                conn.Open();
+
+                using(SqlCommand command = new SqlCommand("UPDATE_VILLAIN", conn)) {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@pVILLAINID", villain.villainID);
+                    command.Parameters.AddWithValue("@pNAME", villain.Name);
+
+                    command.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+            return "Updated Villain";
+        }
     }
 }
