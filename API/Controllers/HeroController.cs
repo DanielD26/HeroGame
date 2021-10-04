@@ -21,31 +21,19 @@ namespace API.Controllers {
             return HeroDatabaseHandler.GetHero(id);
         }
 
-//         [HttpPost]
-//         public Hero Post([FromBody]Hero h) {
-//             heroes.Add(h);
-//             return h;
-//         }
+        [HttpPost]
+        public string Post([FromBody]Hero newHero) {
+            return HeroDatabaseHandler.AddHero(newHero);
+        }
 
-//         [HttpPut]
-//         public int Put([FromBody]Hero NewHero) {
-//             int count = 0;
+        [HttpPut]
+        public string Put([FromBody]Hero hero) {
+            return HeroDatabaseHandler.UpdateHero(hero);
+        }
 
-            
-//             foreach (Hero h in heroes) {
-//                 if (h.heroID == NewHero.heroID) {
-//                     count++;
-//                 }
-//             }
-//             return count;
-//         }
-
-
-//         [HttpDelete]
-//         [Route("{id}")]
-//         public string Delete(int id) {
-//             heroes.Where(x => x.heroID == id).Count();
-//             return heroes.RemoveAll(x => x.heroID == id) + " Heroes deleted.";
-//         }
+        [HttpDelete]
+        public string Delete([FromBody]Hero hero) {
+            return HeroDatabaseHandler.DeleteHero(hero);
+        }
     }
 }

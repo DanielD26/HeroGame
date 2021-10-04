@@ -53,5 +53,55 @@ namespace API {
             }
             return hero;
         }
+
+        public static string AddHero(Hero newHero) {
+            using(SqlConnection conn = new SqlConnection(GetConnectionString())){
+                conn.Open();
+
+                using(SqlCommand command = new SqlCommand("ADD_HERO", conn)) {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@pHEROID", newHero.heroID);
+                    command.Parameters.AddWithValue("@pNAME", newHero.Name);
+                    command.Parameters.AddWithValue("@pMINDICE", newHero.minDice);
+                    command.Parameters.AddWithValue("@pMAXDICE", newHero.maxDice);
+                    command.Parameters.AddWithValue("@pUSES", newHero.Uses);
+                    command.ExecuteNonQuery();
+                    
+                    conn.Close();                 
+                    
+                }
+            }
+            return "Created Hero";
+        }
+
+        public static string UpdateHero(Hero hero) {
+            using(SqlConnection conn = new SqlConnection(GetConnectionString())) {
+                conn.Open();
+
+                using(SqlCommand command = new SqlCommand("UPDATE_HERO", conn)) {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@pHEROID", hero.heroID);
+                    command.Parameters.AddWithValue("@pNAME", hero.Name);
+                    command.Parameters.AddWithValue("@pMINDICE", hero.minDice);
+                    command.Parameters.AddWithValue("@pMAXDICE", hero.maxDice);
+                    command.Parameters.AddWithValue("@pUSES", hero.Uses);
+                    command.ExecuteNonQuery();
+                }
+            }
+            return "Updated Hero";
+        }
+
+        public static string DeleteHero(Hero hero) {
+            using(SqlConnection conn = new SqlConnection(GetConnectionString())) {
+                conn.Open();
+
+                using(SqlCommand command = new SqlCommand("DELETE_HERO", conn)) {
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@pHEROID", hero.heroID);
+                    command.ExecuteNonQuery();
+                }
+            }
+            return "Deleted Hero";
+        }
     }
 }
