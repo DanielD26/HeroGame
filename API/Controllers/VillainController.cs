@@ -15,11 +15,10 @@ namespace API.Controllers {
             return VillainDatabaseHandler.GetVillains();
         }
 
-        // [HttpPost]
-        // public Villain Post([FromBody]Villain v) {
-        //     villains.Add(v);
-        //     return v;
-        // }
+        [HttpPost]
+        public string Post([FromBody]Villain newVillain) {
+            return VillainDatabaseHandler.AddVillain(newVillain);
+        }
         
     }
 }

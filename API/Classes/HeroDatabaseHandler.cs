@@ -86,6 +86,8 @@ namespace API {
                     command.Parameters.AddWithValue("@pMAXDICE", hero.maxDice);
                     command.Parameters.AddWithValue("@pUSES", hero.Uses);
                     command.ExecuteNonQuery();
+
+                    conn.Close();
                 }
             }
             return "Updated Hero";
@@ -99,6 +101,8 @@ namespace API {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@pHEROID", hero.heroID);
                     command.ExecuteNonQuery();
+
+                    conn.Close();
                 }
             }
             return "Deleted Hero";
