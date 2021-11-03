@@ -19,7 +19,7 @@ namespace API {
                         // we have a reader which has the data in it
                         while(reader.Read()){
                             villains.Add(new Villain(){villainID = reader.GetInt32(0),
-                                                    Name = reader.GetString(1)});
+                                                    name = reader.GetString(1)});
                         }
                     }
                 }
@@ -35,7 +35,7 @@ namespace API {
                 using(SqlCommand command = new SqlCommand("ADD_VILLAIN", conn)) {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@pVILLAINID", newVillain.villainID);
-                    command.Parameters.AddWithValue("@pNAME", newVillain.Name);
+                    command.Parameters.AddWithValue("@pNAME", newVillain.name);
 
                     command.ExecuteNonQuery();
                     conn.Close();
@@ -51,7 +51,7 @@ namespace API {
                 using(SqlCommand command = new SqlCommand("UPDATE_VILLAIN", conn)) {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@pVILLAINID", villain.villainID);
-                    command.Parameters.AddWithValue("@pNAME", villain.Name);
+                    command.Parameters.AddWithValue("@pNAME", villain.name);
 
                     command.ExecuteNonQuery();
                     conn.Close();
