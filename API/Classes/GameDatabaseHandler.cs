@@ -13,7 +13,7 @@ namespace API {
                 // Creates command
                 using (SqlCommand command = new SqlCommand("ADD_RESULT", conn)) {
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@pRESULT", newResult.winner);
+                    command.Parameters.AddWithValue("@pWINNER", newResult.winner);
                     command.Parameters.AddWithValue("@pATTACKS", newResult.attacks);
                     command.Parameters.AddWithValue("@pDATE", newResult.date);
                     command.ExecuteNonQuery();
